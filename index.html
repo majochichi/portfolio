@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chichi | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:          #FDF6F8;
+  --bg2:         #FBF0F3;
+  --sakura:      #E8A4B8;
+  --sakura-lt:   #F2C4D4;
+  --sakura-pale: #FAE8EF;
+  --rose:        #B07080;
+  --rose-deep:   #8A5060;
+  --rose-dark:   #6B3A4A;
+  --ivory:       #F5EDE0;
+  --ivory-lt:    #FBF6EE;
+  --text:        #4A3840;
+  --text-mid:    #7A5868;
+  --text-soft:   #A08898;
+  --white:       #FFFFFF;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ── PETAL ANIMATION ── */
+.petal-canvas {
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.petal {
+  position:absolute;top:-60px;
+  font-size:1rem;
+  opacity:0;
+  animation:petalFall linear infinite;
+  user-select:none;
+  pointer-events:none;
+}
+@keyframes petalFall {
+  0%   { transform:translateX(0) rotate(0deg);   opacity:0; top:-60px; }
+  5%   { opacity:.55; }
+  85%  { opacity:.35; }
+  100% { transform:translateX(var(--sway)) rotate(var(--rot)); opacity:0; top:110vh; }
+}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 72px;
+  background:rgba(253,246,248,0.92);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(232,164,184,0.15);
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 4px 28px rgba(232,164,184,0.14);}
+.nav-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:300;color:var(--text);
+  letter-spacing:.1em;
+}
+.nav-brand em{font-style:italic;color:var(--sakura);}
+.nav-menu{display:flex;gap:36px;list-style:none;}
+.nav-menu a{
+  font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--text-soft);text-decoration:none;
+  transition:color .2s;position:relative;
+}
+.nav-menu a::after{
+  content:'';position:absolute;bottom:-3px;left:0;
+  width:0;height:1px;background:var(--sakura);
+  transition:width .3s;
+}
+.nav-menu a:hover{color:var(--sakura);}
+.nav-menu a:hover::after{width:100%;}
+
+/* ── UTILITIES ── */
+.eyebrow{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.72rem;letter-spacing:.5em;text-transform:uppercase;
+  color:var(--sakura);margin-bottom:14px;
+}
+.ttl{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;line-height:1.25;color:var(--text);
+}
+.ttl em{font-style:italic;color:var(--sakura);}
+.rule{width:44px;height:1px;background:linear-gradient(90deg,var(--sakura),transparent);margin:18px 0 32px;}
+
+/* reveal */
+.rv  {opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
+.rv-l{opacity:0;transform:translateX(-32px);transition:opacity .9s ease,transform .9s ease;}
+.rv-r{opacity:0;transform:translateX(32px);transition:opacity .9s ease,transform .9s ease;}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:translate(0);}
+
+/* ═══ SEC 1 HERO ═══ */
+#s1{
+  min-height:100vh;padding-top:60px;
+  display:grid;grid-template-columns:1fr 1fr;
+  background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 55%,#F5E0EA 100%);
+  overflow:hidden;position:relative;z-index:1;
+}
+#s1::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,164,184,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.s1-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 60px 80px 80px;
+  position:relative;z-index:1;
+}
+.catch-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.82rem;letter-spacing:.5em;text-transform:uppercase;
+  color:var(--sakura);margin-bottom:28px;
+  animation:fuA .9s ease both .1s;
+}
+.catch-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,4vw,5rem);
+  font-weight:300;line-height:1.15;letter-spacing:-.01em;
+  animation:fuA .9s ease both .3s;
+}
+.catch-main em{font-style:italic;color:var(--sakura);display:block;}
+.catch-sub2{
+  margin-top:28px;
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(.9rem,1.3vw,1.1rem);
+  color:var(--text-mid);font-weight:300;letter-spacing:.16em;line-height:2.1;
+  animation:fuA .9s ease both .5s;
+}
+.catch-sub2 strong{color:var(--rose);font-weight:500;font-size:1.1em;}
+.kanban{
+  margin-top:40px;align-self:flex-start;
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(232,164,184,.15);
+  border:1px solid rgba(232,164,184,.3);
+  color:var(--rose);padding:14px 32px;border-radius:50px;
+  font-size:clamp(.62rem,.8rem,1rem);letter-spacing:.1em;font-weight:400;
+  white-space:nowrap;
+  box-shadow:0 4px 20px rgba(232,164,184,.12);
+  animation:fuA .9s ease both .7s;
+  backdrop-filter:blur(8px);
+}
+.s1-right{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.blob-wrap{position:relative;z-index:1;animation:sc .9s ease both .4s;}
+.photo-blob{
+  width:320px;height:390px;
+  border-radius:62% 38% 56% 44% / 56% 44% 62% 38%;
+  overflow:hidden;
+  box-shadow:0 20px 56px rgba(232,164,184,.22),0 0 0 1px rgba(232,164,184,.14);
+  animation:blob 12s ease-in-out infinite;
+}
+.blob-ring{
+  position:absolute;inset:-22px;
+  border-radius:62% 38% 56% 44% / 56% 44% 62% 38%;
+  border:1.5px solid rgba(232,164,184,.2);
+  animation:blob 12s ease-in-out infinite reverse;
+  pointer-events:none;
+}
+.blob-ring2{
+  position:absolute;inset:-44px;
+  border-radius:62% 38% 56% 44% / 56% 44% 62% 38%;
+  border:1px solid rgba(232,164,184,.1);
+  animation:blob 12s ease-in-out infinite 2s;
+  pointer-events:none;
+}
+@keyframes blob{
+  0%,100%{border-radius:62% 38% 56% 44% / 56% 44% 62% 38%;}
+  33%{border-radius:38% 62% 44% 56% / 62% 38% 56% 44%;}
+  66%{border-radius:56% 44% 62% 38% / 38% 62% 44% 56%;}
+}
+@keyframes fuA{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes sc  {from{opacity:0;transform:scale(.94);}to{opacity:1;transform:scale(1);}}
+
+/* ═══ SEC 2 IDENTITY ═══ */
+#s2{
+  background:linear-gradient(150deg,var(--rose-dark) 0%,var(--rose-deep) 45%,var(--rose) 85%,var(--sakura) 100%);
+  padding:90px 80px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;overflow:hidden;z-index:1;
+}
+#s2::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:36px 36px;pointer-events:none;
+}
+.s2-in{position:relative;z-index:1;max-width:820px;margin:0 auto;}
+.s2-lbl{font-family:'Cormorant Garamond',serif;font-size:.76rem;letter-spacing:.56em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:30px;}
+.s2-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.6vw,2.6rem);font-weight:300;color:white;line-height:1.45;letter-spacing:.04em;margin-bottom:28px;text-shadow:0 1px 10px rgba(90,40,55,.15);}
+.s2-h strong{font-weight:600;color:var(--ivory);}
+.s2-rule{width:56px;height:1px;background:rgba(255,255,255,.22);margin:0 auto 28px;}
+.s2-body{font-size:.88rem;color:rgba(255,255,255,.78);line-height:2.3;font-weight:300;letter-spacing:.05em;}
+.s2-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:44px;}
+.s2-tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:10px 24px;font-size:.8rem;color:white;letter-spacing:.1em;}
+
+/* ═══ SEC 3 ABOUT ═══ */
+#s3{display:grid;grid-template-columns:420px 1fr;background:var(--bg);overflow:hidden;}
+.s3-left{background:var(--bg);padding:90px 52px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(232,164,184,.1);}
+.s3-left .ttl{font-size:clamp(2rem,3vw,2.8rem);margin-bottom:22px;}
+.s3-left p{font-size:.86rem;color:var(--text-mid);line-height:2.3;font-weight:300;letter-spacing:.03em;}
+.s3-left p strong{color:var(--rose-deep);font-weight:500;}
+.s3-right{padding:90px 72px;display:flex;flex-direction:column;justify-content:center;gap:22px;}
+.rc{
+  background:var(--white);border-radius:20px;
+  padding:26px 28px;border:1px solid rgba(232,164,184,.14);
+  display:flex;gap:20px;align-items:flex-start;
+  box-shadow:0 4px 20px rgba(232,164,184,.08);
+  transition:transform .3s,box-shadow .3s;
+}
+.rc:hover{transform:translateX(8px);box-shadow:0 10px 36px rgba(232,164,184,.18);}
+.rc-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:rgba(232,164,184,.22);line-height:1;flex-shrink:0;width:40px;}
+.rc-body h3{font-size:.9rem;font-weight:500;color:var(--rose);margin-bottom:8px;}
+.rc-body p{font-size:.82rem;color:var(--text-soft);line-height:1.9;font-weight:300;}
+
+/* ═══ SEC 4 CAREER ═══ */
+#s4{background:var(--bg);padding:90px 72px;}
+.s4-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:50px;}
+.s4-head .ttl{font-size:clamp(1.8rem,2.8vw,2.6rem);}
+.s4-note{font-size:.78rem;color:var(--text-soft);text-align:right;line-height:1.9;font-weight:300;}
+.tl-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.tlc{
+  background:var(--white);border-radius:20px;padding:26px 18px;
+  border:1px solid rgba(232,164,184,.16);
+  box-shadow:0 4px 16px rgba(232,164,184,.08);
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.tlc:hover{transform:translateY(-6px);box-shadow:0 16px 38px rgba(232,164,184,.2);}
+.tlc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sakura-lt),var(--sakura));border-radius:0 0 20px 20px;}
+.tlc-icon{font-size:1.9rem;}
+.tlc-yr{font-family:'Cormorant Garamond',serif;font-size:.7rem;letter-spacing:.25em;color:var(--sakura);text-transform:uppercase;}
+.tlc-title{font-size:.84rem;font-weight:500;color:var(--text);line-height:1.55;}
+.tlc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;}
+.tlc-tag{font-size:.64rem;padding:3px 9px;border-radius:12px;background:var(--sakura-pale);color:var(--rose);}
+
+/* ═══ SEC 5 SKILLS ═══ */
+#s5{display:grid;grid-template-columns:1fr 1fr;background:var(--bg2);overflow:hidden;}
+.s5-left{padding:90px 56px 90px 72px;display:flex;flex-direction:column;justify-content:center;gap:16px;}
+.s5-right{padding:90px 72px 90px 48px;display:flex;flex-direction:column;justify-content:center;gap:24px;border-left:1px solid rgba(232,164,184,.12);}
+.ski{
+  background:var(--white);border-radius:16px;padding:18px 20px;
+  border:1px solid rgba(232,164,184,.14);
+  display:flex;gap:14px;align-items:flex-start;
+  transition:transform .3s,box-shadow .3s;
+}
+.ski:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,164,184,.16);}
+.ski-ic{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--sakura-pale),var(--sakura-lt));display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.ski-b h3{font-size:.84rem;font-weight:500;color:var(--rose);margin-bottom:4px;}
+.ski-b p{font-size:.75rem;color:var(--text-soft);line-height:1.8;font-weight:300;}
+.blk-ttl{font-family:'Cormorant Garamond',serif;font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:var(--sakura);margin-bottom:12px;}
+.cert-row{display:flex;flex-wrap:wrap;gap:9px;}
+.cert-p{background:linear-gradient(135deg,var(--sakura-lt),var(--sakura));color:white;padding:8px 18px;border-radius:30px;font-size:.74rem;letter-spacing:.06em;box-shadow:0 4px 12px rgba(232,164,184,.28);}
+.tool-row{display:flex;flex-wrap:wrap;gap:7px;}
+.tool-c{background:var(--ivory-lt);border:1px solid rgba(232,164,184,.2);border-radius:20px;padding:6px 14px;font-size:.72rem;color:var(--text-mid);font-weight:300;transition:all .2s;cursor:default;}
+.tool-c:hover{background:var(--sakura);color:white;}
+/* cert image */
+.cert-img-wrap{width:100%;}
+.cert-img-card{border-radius:16px;overflow:hidden;border:1px solid rgba(232,164,184,.22);box-shadow:0 6px 24px rgba(232,164,184,.16);background:white;transition:transform .3s,box-shadow .3s;}
+.cert-img-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(232,164,184,.26);}
+.cert-img{width:100%;height:auto;display:block;}
+.cert-img-caption{font-size:.72rem;color:var(--text-soft);letter-spacing:.08em;text-align:center;padding:10px 16px;background:var(--sakura-pale);font-weight:300;}
+
+/* ═══ SEC 6 ACHIEVEMENTS ═══ */
+#s6{background:var(--bg);padding:90px 72px;}
+.s6-head{margin-bottom:48px;}
+.ach-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.achc{background:var(--white);border-radius:22px;padding:34px 28px;border:1px solid rgba(232,164,184,.14);box-shadow:0 4px 16px rgba(232,164,184,.07);display:flex;flex-direction:column;gap:14px;transition:transform .3s,box-shadow .3s;}
+.achc:hover{transform:translateY(-6px);box-shadow:0 16px 42px rgba(232,164,184,.2);}
+.ach-ic{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--sakura-pale),var(--sakura-lt));display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+.achc h3{font-size:.9rem;font-weight:500;color:var(--rose);line-height:1.55;}
+.achc p{font-size:.8rem;color:var(--text-soft);line-height:2;font-weight:300;}
+.ach-result{margin-top:auto;background:var(--sakura-pale);border-radius:10px;padding:10px 14px;font-size:.74rem;color:var(--rose-deep);font-weight:400;line-height:1.6;}
+
+/* ═══ SEC 7 SERVICE ═══ */
+#s7{display:grid;grid-template-columns:360px 1fr;background:var(--bg2);overflow:hidden;}
+.s7-left{background:linear-gradient(160deg,var(--sakura-pale),var(--ivory-lt));padding:90px 48px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(232,164,184,.12);}
+.s7-left .ttl{font-size:clamp(1.8rem,2.8vw,2.6rem);margin-bottom:18px;}
+.s7-left p{font-size:.85rem;color:var(--text-mid);line-height:2.1;font-weight:300;}
+.s7-right{padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:center;}
+.svcc{background:var(--white);border-radius:20px;padding:28px 24px;border:1px solid rgba(232,164,184,.14);box-shadow:0 4px 14px rgba(232,164,184,.07);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.svcc:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(232,164,184,.2);}
+.svcc .cn{position:absolute;top:12px;right:16px;font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(232,164,184,.12);line-height:1;}
+.svcc .si{font-size:1.8rem;margin-bottom:12px;display:block;}
+.svcc h3{font-size:.86rem;font-weight:500;color:var(--rose);margin-bottom:8px;}
+.svcc p{font-size:.77rem;color:var(--text-soft);line-height:1.9;font-weight:300;}
+
+/* ═══ PRICING ═══ */
+#s7b{background:var(--bg);padding:90px 72px;}
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:32px;}
+.price-card{background:var(--white);border-radius:24px;padding:36px 28px;border:1px solid rgba(232,164,184,.15);box-shadow:0 4px 20px rgba(232,164,184,.08);display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(232,164,184,.18);}
+.price-card.featured{background:linear-gradient(155deg,var(--rose-deep),var(--rose),var(--sakura));border-color:transparent;box-shadow:0 8px 32px rgba(232,164,184,.32);}
+.pc-badge{position:absolute;top:18px;right:18px;background:var(--ivory);color:var(--rose-deep);font-size:.68rem;font-weight:500;letter-spacing:.1em;padding:4px 12px;border-radius:20px;}
+.pc-label{font-family:'Cormorant Garamond',serif;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--sakura);margin-bottom:4px;}
+.featured .pc-label{color:rgba(255,255,255,.6);}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--text);margin-bottom:12px;letter-spacing:.05em;}
+.featured .pc-name{color:white;}
+.pc-price{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--rose);line-height:1;display:flex;align-items:baseline;gap:2px;}
+.featured .pc-price{color:white;}
+.pc-yen{font-size:1.4rem;}
+.pc-unit{font-size:.78rem;color:var(--text-soft);letter-spacing:.05em;margin-left:4px;}
+.featured .pc-unit{color:rgba(255,255,255,.65);}
+.pc-desc{font-size:.78rem;color:var(--text-soft);line-height:1.85;font-weight:300;}
+.featured .pc-desc{color:rgba(255,255,255,.75);}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;}
+.pc-list li{font-size:.78rem;color:var(--text-mid);font-weight:300;padding-left:16px;position:relative;line-height:1.6;}
+.pc-list li::before{content:'✦';position:absolute;left:0;color:var(--sakura);font-size:.55rem;top:3px;}
+.featured .pc-list li{color:rgba(255,255,255,.85);}
+.featured .pc-list li::before{color:var(--ivory);}
+.pc-btn{display:block;text-align:center;background:linear-gradient(135deg,var(--sakura-lt),var(--sakura));color:white;padding:13px;border-radius:30px;font-size:.78rem;letter-spacing:.14em;font-weight:400;text-decoration:none;box-shadow:0 4px 14px rgba(232,164,184,.3);transition:all .3s;}
+.pc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,164,184,.42);}
+.featured .pc-btn{background:white;color:var(--rose);box-shadow:0 4px 14px rgba(0,0,0,.1);}
+.featured .pc-btn:hover{background:var(--ivory);}
+.pc-hours{background:var(--sakura-pale);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;}
+.featured-hours{background:rgba(255,255,255,.15);}
+.ph-row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--text-mid);font-weight:300;padding:4px 0;border-bottom:1px solid rgba(232,164,184,.1);}
+.ph-row:last-child{border-bottom:none;}
+.ph-row.header{font-size:.68rem;color:var(--text-soft);font-weight:400;letter-spacing:.06em;border-bottom:1px solid rgba(232,164,184,.18);padding-bottom:6px;}
+.featured .ph-row{color:rgba(255,255,255,.85);border-bottom-color:rgba(255,255,255,.1);}
+.featured .ph-row.header{color:rgba(255,255,255,.55);border-bottom-color:rgba(255,255,255,.2);}
+.featured .ph-row span:last-child{color:var(--ivory);font-weight:400;}
+.price-note{text-align:center;font-size:.76rem;color:var(--text-soft);letter-spacing:.05em;font-weight:300;margin-top:8px;}
+
+/* ═══ VOICE ═══ */
+#s8v{background:var(--bg2);padding:90px 72px;}
+.voice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.voice-card{background:var(--white);border-radius:24px;padding:36px 30px;border:1px solid rgba(232,164,184,.14);box-shadow:0 4px 20px rgba(232,164,184,.07);display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.voice-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(232,164,184,.18);}
+.voice-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--sakura-lt),var(--sakura));border-radius:4px 0 0 4px;}
+.vc-quote{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:rgba(232,164,184,.2);line-height:.8;margin-bottom:-8px;}
+.vc-text{font-family:'Noto Serif JP',serif;font-size:.9rem;color:var(--text);line-height:2;font-weight:400;letter-spacing:.04em;flex:1;}
+.vc-from{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid rgba(232,164,184,.12);}
+.vc-icon{font-size:1.4rem;}
+.vc-name{font-size:.78rem;font-weight:500;color:var(--rose);letter-spacing:.04em;margin-bottom:3px;}
+.vc-role{font-size:.72rem;color:var(--text-soft);font-weight:300;letter-spacing:.04em;}
+
+/* ═══ CTA ═══ */
+#s9{
+  background:linear-gradient(145deg,var(--bg) 0%,var(--sakura-pale) 50%,var(--ivory-lt) 100%);
+  padding:130px 80px;text-align:center;position:relative;overflow:hidden;z-index:1;
+}
+#s9::before{content:'✿';position:absolute;font-size:30rem;line-height:1;color:rgba(232,164,184,.06);top:-80px;left:50%;transform:translateX(-50%);pointer-events:none;}
+.cta-in{position:relative;z-index:1;}
+.cta-ey{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.5em;text-transform:uppercase;color:var(--sakura);margin-bottom:22px;}
+.cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.6rem);font-weight:300;color:var(--text);line-height:1.28;margin-bottom:26px;}
+.cta-h em{font-style:italic;color:var(--sakura);}
+.cta-sub{font-size:.9rem;color:var(--text-mid);line-height:2.4;font-weight:300;max-width:440px;margin:0 auto 52px;letter-spacing:.04em;}
+.cta-btns{display:flex;gap:16px;justify-content:center;margin-bottom:60px;position:relative;z-index:2;}
+.btn-f{
+  background:linear-gradient(135deg,var(--sakura-lt),var(--sakura));
+  color:white;padding:18px 52px;border-radius:50px;
+  font-size:.86rem;letter-spacing:.18em;font-weight:400;
+  text-decoration:none;
+  box-shadow:0 8px 30px rgba(232,164,184,.42);
+  transition:all .3s;display:inline-block;
+}
+.btn-f:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(232,164,184,.55);}
+.btn-o{
+  background:transparent;color:var(--rose);
+  padding:18px 52px;border-radius:50px;
+  font-size:.86rem;letter-spacing:.18em;font-weight:400;
+  text-decoration:none;border:1.5px solid var(--sakura);
+  transition:all .3s;display:inline-block;
+}
+.btn-o:hover{background:var(--sakura);color:white;transform:translateY(-3px);}
+.sns-btns{display:flex;gap:14px;justify-content:center;margin-bottom:40px;}
+.sns-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:50px;font-size:.8rem;letter-spacing:.12em;font-weight:400;text-decoration:none;transition:all .3s;}
+.sns-ig{background:white;color:var(--rose);border:1.5px solid var(--sakura);box-shadow:0 4px 14px rgba(232,164,184,.14);}
+.sns-ig:hover{background:var(--sakura);color:white;transform:translateY(-2px);}
+.sns-note{background:white;color:var(--text-mid);border:1.5px solid rgba(232,164,184,.3);box-shadow:0 4px 14px rgba(232,164,184,.1);}
+.sns-note:hover{background:var(--sakura-pale);color:var(--rose);transform:translateY(-2px);}
+.cta-prof{display:inline-flex;align-items:center;gap:16px;background:white;border:1px solid rgba(232,164,184,.22);border-radius:60px;padding:12px 30px 12px 14px;box-shadow:0 4px 18px rgba(232,164,184,.12);}
+.cta-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--sakura-pale),var(--sakura-lt));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.cta-nm .job{font-family:'Cormorant Garamond',serif;font-size:.84rem;color:var(--sakura);font-style:italic;}
+.cta-nm .name{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:500;color:var(--rose);letter-spacing:.12em;}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--rose-dark);color:rgba(255,255,255,.38);text-align:center;padding:32px 40px;font-size:.74rem;letter-spacing:.1em;}
+footer em{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(232,164,184,.7);}
+
+/* ═══ SNS ICON ═══ */
+.sns-icon{font-size:.9rem;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px){
+  .nav{padding:0 24px;}
+  .nav-menu{display:none;}
+  #s1{grid-template-columns:1fr;min-height:auto;}
+  #s1 .s1-right{padding:40px 0 0;order:-1;}
+  #s1 .s1-left{padding:40px 28px 60px;}
+  .s1-left .kanban{align-self:center;}
+  #s3,#s5,#s7{grid-template-columns:1fr;}
+  #s7 .s7-right{grid-template-columns:1fr;}
+  #s4 .tl-row{grid-template-columns:1fr 1fr;}
+  #s6 .ach-row{grid-template-columns:1fr;}
+  #s2,#s4,#s6,#s9{padding:64px 28px;}
+  #s3 .s3-left,#s3 .s3-right{padding:52px 28px;}
+  #s5 .s5-left,#s5 .s5-right{padding:52px 28px;}
+  #s7b{padding:64px 28px;}
+  .price-row{grid-template-columns:1fr;}
+  .voice-row{grid-template-columns:1fr;}
+  #s8v{padding:64px 28px;}
+  .s2-h{font-size:clamp(1rem,4vw,1.6rem)!important;word-break:break-all;}
+  .s4-head{flex-direction:column;align-items:flex-start;gap:8px;}
+  .s4-note{text-align:left!important;font-size:.72rem!important;}
+  .cta-h{font-size:clamp(1.7rem,5.5vw,2.2rem)!important;}
+  .cta-btns{flex-direction:row;gap:12px;flex-wrap:nowrap;}
+  .btn-f,.btn-o{padding:14px 24px!important;font-size:.78rem!important;letter-spacing:.08em!important;white-space:nowrap;}
+  .photo-blob{width:240px;height:295px;}
+  .cert-img-wrap{margin-top:8px;}
+}
+
+/* ═══ CONTACT FORM BUTTON ═══ */
+.form-btn-wrap {
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.form-btn-label {
+  font-size: .76rem;
+  color: var(--text-soft);
+  letter-spacing: .12em;
+  font-weight: 300;
+}
+.btn-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--rose);
+  padding: 18px 48px;
+  border-radius: 50px;
+  font-size: .86rem;
+  letter-spacing: .14em;
+  font-weight: 400;
+  text-decoration: none;
+  border: 1.5px solid rgba(232,164,184,.5);
+  box-shadow: 0 6px 24px rgba(232,164,184,.18);
+  transition: all .3s;
+}
+.btn-form:hover {
+  background: var(--sakura-pale);
+  border-color: var(--sakura);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(232,164,184,.28);
+}
+.form-btn-note {
+  font-size: .72rem;
+  color: var(--text-soft);
+  letter-spacing: .08em;
+  font-weight: 300;
+}
+@media(max-width:960px) {
+  .btn-form { padding: 16px 28px; font-size: .8rem; letter-spacing: .08em; }
+}
+</style>
+</head>
+<body>
+
+<!-- 花びらキャンバス -->
+<div class="petal-canvas" id="petalCanvas"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-brand"><em>chichi</em>　majochichi</div>
+  <ul class="nav-menu">
+    <li><a href="#s1">Home</a></li>
+    <li><a href="#s3">About</a></li>
+    <li><a href="#s4">Career</a></li>
+    <li><a href="#s5">Skills</a></li>
+    <li><a href="#s7">Service</a></li>
+    <li><a href="#s9">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="s1">
+  <div class="s1-left">
+    <p class="catch-sub">AI Online Secretary &amp; Mentor</p>
+    <h1 class="catch-main">
+      <em>整えるのは、</em>
+      書類だけじゃない。
+    </h1>
+    <p class="catch-sub2">
+      仕事が回る。心も整う。<br>
+      <strong>chichi</strong>
+    </p>
+    <div class="kanban">✦　事務職17年 × 傾聴30年 × AI活用　✦</div>
+  </div>
+  <div class="s1-right">
+    <div class="blob-wrap">
+      <div class="blob-ring2"></div>
+      <div class="blob-ring"></div>
+      <div class="photo-blob">
+        <img src="photo.png" alt="chichi" style="width:100%;height:100%;object-fit:cover;object-position:center top;"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section id="s2">
+  <div class="s2-in">
+    <p class="s2-lbl rv">My Signature</p>
+    <h2 class="s2-h rv"><strong>事務職17年 × 傾聴30年 × AI活用</strong><br>この掛け算が、唯一無二の価値を生む。</h2>
+    <div class="s2-rule rv"></div>
+    <p class="s2-body rv">書類作成・データ管理・スケジュール調整——確かな事務スキルと、ヒーラー・メンターとして培った「人の心を読む力」。そこにAIの力が加わり、誰にも真似できないサポートが生まれます。</p>
+    <div class="s2-tags rv">
+      <span class="s2-tag">事務職 17年</span>
+      <span class="s2-tag">傾聴 30年</span>
+      <span class="s2-tag">AIオンライン秘書 認定</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="s3">
+  <div class="s3-left rv-l">
+    <p class="eyebrow">About Me</p>
+    <h2 class="ttl">私が<em>選ばれる</em><br>3つの理由</h2>
+    <div class="rule"></div>
+    <p>接客・物流・商社・経営企画と<br>多彩な現場で積み上げた<strong>17年の実務力</strong>。<br><br>そして30年にわたる傾聴と<br>人生相談の経験が融合したとき、<br>単なる「秘書」を超えた<br><strong>信頼のパートナー</strong>が生まれます。</p>
+  </div>
+  <div class="s3-right">
+    <div class="rc rv" style="transition-delay:.1s">
+      <div class="rc-num">01</div>
+      <div class="rc-body"><h3>🤝 共感力 × 実務力の融合</h3><p>人の気持ちを自然に読み取る繊細さと、17年間の幅広い事務経験を兼ね備えています。業務サポートだけでなく、心理的な不安にも寄り添える唯一無二の存在です。</p></div>
+    </div>
+    <div class="rc rv" style="transition-delay:.2s">
+      <div class="rc-num">02</div>
+      <div class="rc-body"><h3>✨ 揺るぎない誠実さと責任感</h3><p>「やると決めたことは最後までやり抜く」が信条。機密情報の管理・丁寧な対応を通じて、クライアントから揺るぎない信頼を積み重ねてきました。</p></div>
+    </div>
+    <div class="rc rv" style="transition-delay:.3s">
+      <div class="rc-num">03</div>
+      <div class="rc-body"><h3>🌱 AI × 人の温もりの両立</h3><p>最新のAIツールを駆使しながら、人にしかできない「寄り添い」を大切に。効率と温かさを同時に提供する、新時代の秘書スタイルです。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="s4">
+  <div class="s4-head rv">
+    <div>
+      <p class="eyebrow">Career History</p>
+      <h2 class="ttl">積み重ねてきた<br><em>実務の軌跡</em></h2>
+    </div>
+    <p class="s4-note">多業種にわたる経験が<br>唯一無二のスキルセットを生んでいます</p>
+  </div>
+  <div class="tl-row">
+    <div class="tlc rv" style="transition-delay:.05s"><span class="tlc-icon">👟</span><p class="tlc-yr">5 Years</p><p class="tlc-title">ショッピングモール<br>接客販売・店長補佐</p><div class="tlc-tags"><span class="tlc-tag">顧客対応</span><span class="tlc-tag">ニーズヒアリング</span><span class="tlc-tag">売場づくり</span><span class="tlc-tag">在庫管理</span><span class="tlc-tag">新人教育</span></div></div>
+    <div class="tlc rv" style="transition-delay:.1s"><span class="tlc-icon">🚚</span><p class="tlc-yr">6 Years</p><p class="tlc-title">物流業<br>一般事務</p><div class="tlc-tags"><span class="tlc-tag">データ管理</span><span class="tlc-tag">文書作成</span><span class="tlc-tag">30名サポート</span><span class="tlc-tag">勤怠管理</span><span class="tlc-tag">経理補助</span></div></div>
+    <div class="tlc rv" style="transition-delay:.15s"><span class="tlc-icon">🏢</span><p class="tlc-yr">3 Years</p><p class="tlc-title">ライフライン関連商社<br>営業事務</p><div class="tlc-tags"><span class="tlc-tag">電話100本/日</span><span class="tlc-tag">受注管理</span><span class="tlc-tag">納期調整</span><span class="tlc-tag">見積・請求書</span></div></div>
+    <div class="tlc rv" style="transition-delay:.2s"><span class="tlc-icon">📊</span><p class="tlc-yr">3 Years</p><p class="tlc-title">大手電力関連会社<br>経営企画サポート事務</p><div class="tlc-tags"><span class="tlc-tag">経営資料作成</span><span class="tlc-tag">数値集計</span><span class="tlc-tag">月次報告</span><span class="tlc-tag">機密管理</span></div></div>
+    <div class="tlc rv" style="transition-delay:.25s"><span class="tlc-icon">🌸</span><p class="tlc-yr">30 Years</p><p class="tlc-title">心理メンター・ヒーラー<br>（30年）</p><div class="tlc-tags"><span class="tlc-tag">傾聴</span><span class="tlc-tag">人生相談</span><span class="tlc-tag">思考整理</span><span class="tlc-tag">意思決定支援</span><span class="tlc-tag">守秘徹底</span></div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="s5">
+  <div class="s5-left">
+    <p class="eyebrow">Skills</p>
+    <h2 class="ttl" style="font-size:clamp(1.8rem,2.8vw,2.6rem);margin-bottom:20px;">スキル<em>6カテゴリ</em></h2>
+    <div class="ski rv" style="transition-delay:.05s"><div class="ski-ic">📋</div><div class="ski-b"><h3>事務・管理スキル</h3><p>書類作成・データ管理・スケジュール調整・経理補助。多業種17年の実務で培った幅広いオフィスワーク。</p></div></div>
+    <div class="ski rv" style="transition-delay:.1s"><div class="ski-ic">💬</div><div class="ski-b"><h3>コミュニケーション力</h3><p>傾聴30年・電話100本/日の実績。相手に寄り添いながら的確に伝える高い対人スキル。</p></div></div>
+    <div class="ski rv" style="transition-delay:.15s"><div class="ski-ic">🤖</div><div class="ski-b"><h3>AI活用スキル</h3><p>ChatGPT・Claude・Geminiを駆使して議事録・メール・SNS文章・資料作成を効率化。AIオンライン秘書認定。</p></div></div>
+    <div class="ski rv" style="transition-delay:.2s"><div class="ski-ic">📊</div><div class="ski-b"><h3>Excel・資料作成</h3><p>MOS Excel取得。経営数値の集計からPowerPointプレゼン資料まで幅広く対応。</p></div></div>
+    <div class="ski rv" style="transition-delay:.25s"><div class="ski-ic">🌐</div><div class="ski-b"><h3>英語スキル</h3><p>TOEIC 881点・TOEFL 87点。外国人スタッフとの実務コミュニケーションが可能。</p></div></div>
+    <div class="ski rv" style="transition-delay:.3s"><div class="ski-ic">🌸</div><div class="ski-b"><h3>メンタルサポート</h3><p>起業の不安・人間関係・意思決定の壁打ちまで。30年の傾聴経験で、心が整うと仕事も動き出します。</p></div></div>
+  </div>
+  <div class="s5-right rv-r">
+    <div>
+      <p class="blk-ttl">Qualifications</p>
+      <div class="cert-row">
+        <span class="cert-p">AIオンライン秘書認定</span>
+        <span class="cert-p">MOS Excel</span><span class="cert-p">MOS Word</span>
+        <span class="cert-p">TOEIC 881点</span><span class="cert-p">TOEFL 87点</span>
+      </div>
+    </div>
+    <div class="cert-img-wrap rv" style="transition-delay:.15s">
+      <p class="blk-ttl">Certificate</p>
+      <div class="cert-img-card">
+        <img src="certificate.jpg" alt="AIオンライン秘書認定証" class="cert-img"/>
+        <p class="cert-img-caption">AIオンライン秘書 認定証　No.000018</p>
+      </div>
+    </div>
+    <div>
+      <p class="blk-ttl">Tools</p>
+      <div class="tool-row">
+        <span class="tool-c">Microsoft Excel</span><span class="tool-c">Microsoft Word</span>
+        <span class="tool-c">PowerPoint</span><span class="tool-c">Outlook</span>
+        <span class="tool-c">Google ドキュメント</span><span class="tool-c">スプレッドシート</span>
+        <span class="tool-c">Google スライド</span><span class="tool-c">Canva</span>
+        <span class="tool-c">ChatGPT</span><span class="tool-c">Claude</span><span class="tool-c">Gemini</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="s6">
+  <div class="s6-head rv">
+    <p class="eyebrow">Achievements</p>
+    <h2 class="ttl">乗り越えてきた<br><em>3つのエピソード</em></h2>
+    <div class="rule"></div>
+  </div>
+  <div class="ach-row">
+    <div class="achc rv" style="transition-delay:.1s"><div class="ach-ic">📈</div><h3>現場の声を形に——<br>部門売上への貢献</h3><p>本部主導の画一的な売場と現場ニーズの乖離に気づき、独自の改善を提案・実行。「選びやすくなった」と高評価を受け、苦戦していた部門売上の回復に貢献しました。</p><div class="ach-result">✦ 顧客満足度の向上 → 部門売上に貢献</div></div>
+    <div class="achc rv" style="transition-delay:.2s"><div class="ach-ic">🤲</div><h3>組織の壁を溶かす——<br>新人定着率の向上</h3><p>30名規模の物流現場で新人の孤立に着目。リーダーと連携し挨拶・声かけのルール化を提案、自ら「潤滑油」として双方を仲介し心理的障壁を取り除きました。</p><div class="ach-result">✦ 定着率向上 → 「新人歓迎文化」の醸成</div></div>
+    <div class="achc rv" style="transition-delay:.3s"><div class="ach-ic">🌟</div><h3>誠実な対応が信頼に——<br>クレーム解決と信頼回復</h3><p>納期遅延クレームに対し、まず感情面に寄り添い状況を丁寧に説明。その後社内で即納可能なメーカーを緊急手配し問題を最小化。誠実さで信頼を回復しました。</p><div class="ach-result">✦ 問題を最小化 → 誠実さで信頼を回復</div></div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="s7">
+  <div class="s7-left rv-l">
+    <p class="eyebrow">Service</p>
+    <h2 class="ttl">ご支援できる<br><em>クライアント</em></h2>
+    <div class="rule"></div>
+    <p>業務の効率化だけでなく、<br>心理的な不安へのケアも。<br><br>「唯一無二の融合型サポート」で<br>あなたの事業に寄り添います。</p>
+  </div>
+  <div class="s7-right">
+    <div class="svcc rv" style="transition-delay:.1s"><span class="cn">01</span><span class="si">👩‍🦰</span><h3>孤独な女性起業家のサポート</h3><p>一人で抱え込み相談相手がいない女性起業家に、業務と心の両面から伴走型でお支えします。</p></div>
+    <div class="svcc rv" style="transition-delay:.15s"><span class="cn">02</span><span class="si">🌍</span><h3>外国人受入企業への支援</h3><p>英語力（TOEIC 881点）と多文化理解を活かし、外国人社員との円滑な職場環境を構築します。</p></div>
+    <div class="svcc rv" style="transition-delay:.2s"><span class="cn">03</span><span class="si">🌸</span><h3>実務 × 心のサポートが必要な方</h3><p>業務効率化とメンタルケアを一体提供。忙しい経営者・リーダーの右腕として伴走します。</p></div>
+    <div class="svcc rv" style="transition-delay:.25s"><span class="cn">04</span><span class="si">✨</span><h3>女性向けメンターサポート</h3><p>心の迷いや新しい挑戦への一歩を、30年の傾聴経験で伴走します。</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="s7b">
+  <div class="rv" style="margin-bottom:44px;">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="ttl" style="font-size:clamp(1.8rem,2.8vw,2.6rem);">料金<em>プラン</em></h2>
+    <div class="rule"></div>
+  </div>
+  <div class="price-row rv">
+    <div class="price-card">
+      <div><p class="pc-label">Light</p><p class="pc-name">ライト</p><div class="pc-price"><span class="pc-yen">¥</span>35,000<span class="pc-unit">円〜 / 月</span></div><p class="pc-desc">事務サポートに特化したベーシックプラン。まずは気軽に始めたい方に。</p></div>
+      <ul class="pc-list"><li>書類作成・データ入力</li><li>スケジュール管理</li><li>メール・電話対応</li><li>各種リサーチ</li></ul>
+      <div class="pc-hours"><div class="ph-row header"><span>稼働時間</span><span>月額目安</span></div><div class="ph-row"><span>10時間 / 月</span><span>¥35,000〜</span></div><div class="ph-row"><span>20時間 / 月</span><span>¥70,000〜</span></div><div class="ph-row"><span>30時間 / 月</span><span>¥105,000〜</span></div></div>
+      <a href="https://lin.ee/WwgJYQt" target="_blank" class="pc-btn">相談してみる</a>
+    </div>
+    <div class="price-card featured">
+      <div class="pc-badge">おすすめ</div>
+      <div><p class="pc-label">Standard</p><p class="pc-name">スタンダード</p><div class="pc-price"><span class="pc-yen">¥</span>45,000<span class="pc-unit">円〜 / 月</span></div><p class="pc-desc">事務サポート＋AIを駆使して業務を効率化。最もご依頼の多いプランです。</p></div>
+      <ul class="pc-list"><li>ライトの内容すべて</li><li>AI活用による業務効率化</li><li>資料・プレゼン作成</li><li>英語対応（TOEIC 881点）</li></ul>
+      <div class="pc-hours featured-hours"><div class="ph-row header"><span>稼働時間</span><span>月額目安</span></div><div class="ph-row"><span>10時間 / 月</span><span>¥45,000〜</span></div><div class="ph-row"><span>20時間 / 月</span><span>¥90,000〜</span></div><div class="ph-row"><span>30時間 / 月</span><span>¥135,000〜</span></div></div>
+      <a href="https://lin.ee/WwgJYQt" target="_blank" class="pc-btn">相談してみる</a>
+    </div>
+    <div class="price-card">
+      <div><p class="pc-label">Premium</p><p class="pc-name">プレミアム</p><div class="pc-price"><span class="pc-yen">¥</span>60,000<span class="pc-unit">円〜 / 月</span></div><p class="pc-desc">事務＋AI＋メンタルサポートの完全伴走型。あなた専属の右腕として。</p></div>
+      <ul class="pc-list"><li>スタンダードの内容すべて</li><li>傾聴・メンタルサポート</li><li>意思決定・思考整理の支援</li><li>優先対応・専属サポート</li><li>月次レポート・振り返り</li></ul>
+      <div class="pc-hours"><div class="ph-row header"><span>稼働時間</span><span>月額目安</span></div><div class="ph-row"><span>10時間 / 月</span><span>¥60,000〜</span></div><div class="ph-row"><span>20時間 / 月</span><span>¥120,000〜</span></div><div class="ph-row"><span>30時間 / 月</span><span>¥180,000〜</span></div></div>
+      <a href="https://lin.ee/WwgJYQt" target="_blank" class="pc-btn">相談してみる</a>
+    </div>
+  </div>
+  <p class="price-note rv">※ すべてのプランは初回無料相談後にご提案します。まずはお気軽にご連絡ください。</p>
+</section>
+
+<!-- VOICE -->
+<section id="s8v">
+  <div style="margin-bottom:44px;text-align:center;">
+    <p class="eyebrow">Voice</p>
+    <h2 class="ttl" style="font-size:clamp(1.8rem,2.8vw,2.6rem);">お客様の<em>声</em></h2>
+    <div class="rule" style="margin:18px auto 0;"></div>
+  </div>
+  <div class="voice-row">
+    <div class="voice-card rv" style="transition-delay:.1s"><div class="vc-quote">"</div><p class="vc-text">新規事業の世界観から会社のイメージカラー、インフラ企業ならではの身近さまで、すべての意図を汲み取って形にしてくれた。イメージ通りの案内状ができました。ありがとう。</p><div class="vc-from"><span class="vc-icon">🌸</span><div><p class="vc-name">大手電力関連会社・経営企画部 上層部</p><p class="vc-role">新規事業シンポジウム案内状作成にて</p></div></div></div>
+    <div class="voice-card rv" style="transition-delay:.2s"><div class="vc-quote">"</div><p class="vc-text">1日100件の電話をワンコールで受けてくれる。対応が早くて丁寧で、お客様からも社内からも信頼が厚い。いつも本当にありがとう。</p><div class="vc-from"><span class="vc-icon">🌸</span><div><p class="vc-name">同僚・お客様よりいただいた言葉</p><p class="vc-role">ライフライン関連商社・営業事務時代</p></div></div></div>
+    <div class="voice-card rv" style="transition-delay:.3s"><div class="vc-quote">"</div><p class="vc-text">自分の業務だけでなく、現場スタッフ30名一人ひとりの相談に耳を傾け、いつも親身にサポートしてくれた。あなたがいてくれたから、チームがまとまれた。</p><div class="vc-from"><span class="vc-icon">🌸</span><div><p class="vc-name">現場スタッフ・リーダーよりいただいた言葉</p><p class="vc-role">物流業・一般事務時代（30名規模）</p></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="s9">
+  <div class="cta-in">
+    <p class="cta-ey rv">Contact</p>
+    <h2 class="cta-h rv"><em>頼んでよかった。</em><br>そう言ってもらえる<br>仕事をする。</h2>
+    <p class="cta-sub rv">仕事も、心も。あなたのそばに。<br><br>まずはお気軽にご相談ください。<br>無料相談・お問い合わせはこちらから。</p>
+    <div class="cta-btns rv">
+      <a href="https://lin.ee/WwgJYQt" target="_blank" class="btn-f">✦ 無料相談はこちら</a>
+      <a href="https://lin.ee/WwgJYQt" target="_blank" class="btn-o">お問い合わせ</a>
+    </div>
+    <div class="sns-btns rv">
+      <a href="https://www.instagram.com/majochichi?igsh=MXdiZG54cHB3OHd3Zw%3D%3D&utm_source=qr" target="_blank" class="sns-btn sns-ig"><span class="sns-icon">📷</span> Instagram</a>
+      <a href="https://note.com/majochichi" target="_blank" class="sns-btn sns-note"><span class="sns-icon">✏️</span> note</a>
+    </div>
+    <div class="rv">
+      <div class="cta-prof">
+        <div class="cta-av">🌸</div>
+        <div class="cta-nm">
+          <div class="job">AIオンライン秘書 &amp; メンター</div>
+          <div class="name">chichi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Form Button -->
+    <div class="form-btn-wrap rv" style="transition-delay:.2s;">
+      <p class="form-btn-label">✦ フォームでのお問い合わせはこちら ✦</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMQ7Roq-XoefOanGZMNRbTM9XdJZxyy_jjKoaDhbFh8rBpSA/viewform?usp=header" target="_blank" class="btn-form">
+        📋　無料相談・お問い合わせフォーム
+      </a>
+      <p class="form-btn-note">2営業日以内にご返信いたします</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <em>chichi / majochichi</em><br>
+  AI Online Secretary &amp; Mentor<br>
+  <span style="margin-top:6px;display:block;font-size:.68rem;">整えるのは、書類だけじゃない。<br>事務職17年 × 傾聴30年 × AI活用</span>
+  <div style="margin-top:14px;display:flex;justify-content:center;gap:20px;">
+    <a href="https://www.instagram.com/majochichi?igsh=MXdiZG54cHB3OHd3Zw%3D%3D&utm_source=qr" target="_blank" style="color:rgba(232,164,184,.7);font-size:.72rem;text-decoration:none;letter-spacing:.12em;">📷 Instagram</a>
+    <a href="https://note.com/majochichi" target="_blank" style="color:rgba(232,164,184,.7);font-size:.72rem;text-decoration:none;letter-spacing:.12em;">✏️ note</a>
+  </div>
+</footer>
+
+<script>
+// ── NAV ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// ── REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
+
+// ── PETAL ANIMATION ──
+const canvas = document.getElementById('petalCanvas');
+const petalShapes = ['🌸','🌸','🌸','🌸','🌸','🌸'];
+// ゾーン設定: Hero周辺に少し多め、全体に軽く漂う
+const zones = [
+  // [left%, weight] Hero周辺多め
+  ...Array(12).fill(null).map(()=>Math.random()*100),
+];
+
+const totalPetals = 22;
+
+for(let i = 0; i < totalPetals; i++) {
+  const el = document.createElement('span');
+  el.className = 'petal';
+
+  const shape = petalShapes[Math.floor(Math.random() * petalShapes.length)];
+  el.textContent = shape;
+
+  // サイズ: 大・中・小 をランダムに
+  const sizeGroup = Math.random();
+  let fontSize, opacity;
+  if(sizeGroup < 0.25) {
+    fontSize = (0.65 + Math.random() * 0.2).toFixed(2); // 小
+    opacity = (0.25 + Math.random() * 0.2).toFixed(2);
+  } else if(sizeGroup < 0.65) {
+    fontSize = (0.85 + Math.random() * 0.25).toFixed(2); // 中
+    opacity = (0.3 + Math.random() * 0.2).toFixed(2);
+  } else {
+    fontSize = (1.1 + Math.random() * 0.3).toFixed(2); // 大
+    opacity = (0.35 + Math.random() * 0.15).toFixed(2);
+  }
+  el.style.fontSize = fontSize + 'rem';
+
+  // 横位置: CTAボタン周辺(中央30-70%)を少し避ける
+  let left;
+  const r = Math.random();
+  if(r < 0.35) left = Math.random() * 30;       // 左エリア
+  else if(r < 0.5) left = 70 + Math.random() * 30; // 右エリア
+  else left = Math.random() * 100;               // 全体にも少し
+  el.style.left = left.toFixed(1) + '%';
+
+  // 落下速度: 速さにばらつき (遅め重視 → ふわふわ感)
+  const duration = (14 + Math.random() * 18).toFixed(1); // 14〜32秒
+  el.style.animationDuration = duration + 's';
+
+  // 開始タイミング: ずらしてランダムに
+  const delay = -(Math.random() * 30).toFixed(1);
+  el.style.animationDelay = delay + 's';
+
+  // 横揺れ・回転: CSS変数で個別設定
+  const swayDir = Math.random() < 0.5 ? 1 : -1;
+  const swayAmt = (20 + Math.random() * 60).toFixed(0);
+  const rotAmt  = (180 + Math.random() * 360).toFixed(0);
+  el.style.setProperty('--sway', `${swayDir * swayAmt}px`);
+  el.style.setProperty('--rot',  `${rotAmt}deg`);
+
+  el.style.opacity = '0';
+  canvas.appendChild(el);
+}
+</script>
+</body>
+</html>
